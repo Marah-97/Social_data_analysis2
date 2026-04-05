@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figure 3: Policy-sensitive drug incident mix</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #ffffff; }
+    #chart { width: 100%; height: 760px; }
+  </style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script>
+    const groups = ["Possession/Paraphernalia", "Sales/Distribution", "Use/Under influence", "Loitering/Place", "Other legal subtype"];
+    const labels = {"Possession/Paraphernalia": "Possession", "Sales/Distribution": "Sales", "Use/Under influence": "Use", "Loitering/Place": "Loitering", "Other legal subtype": "Other"};
+    const colors = ["#C0392B", "#1A7A6E", "#B8860B", "#7F8C8D", "#5D6D7E"];
+    const compareYears = ["2024", "2025"];
+    const deltaLabels = ["Possession", "Other", "Use", "Loitering", "Sales"];
+    const deltaValues = [2070, 489, 425, 15, -448];
+    const deltaColors = ["#1A7A6E", "#1A7A6E", "#1A7A6E", "#1A7A6E", "#C0392B"];
+    const stack2024 = [27.646, 41.589, 13.463, 0.552, 16.751];
+    const stack2025 = [47.961, 19.128, 14.677, 0.566, 17.669];
+
+    const traces = [{
+      type: 'bar',
+      x: deltaLabels,
+      y: deltaValues,
+      marker: { color: deltaColors },
+      text: deltaValues.map(v => `${v >= 0 ? '+' : ''}${v.toLocaleString()}`),
+      textposition: 'auto',
+      cliponaxis: false,
+      showlegend: false,
+      hovertemplate: '%{x}<br>Change=%{y:+,.0f}<extra></extra>',
+      xaxis: 'x',
+      yaxis: 'y'
+    }];
+
+    groups.forEach((grp, i) => {
+      traces.push({
+        type: 'bar',
+        x: compareYears,
+        y: [stack2024[i], stack2025[i]],
+        name: labels[grp] || grp,
+        marker: { color: colors[i] },
+        hovertemplate: '%{fullData.name}<br>Year=%{x}<br>Share=%{y:.1f}%<extra></extra>',
+        xaxis: 'x2',
+        yaxis: 'y2'
+      });
+    });
+
+    const layout = {
+      title: {
+        text: 'What drove the 2025 rebound in drug incidents?',
+        x: 0.01, xanchor: 'left',
+        y: 0.98
+      },
+      paper_bgcolor: '#ffffff',
+      plot_bgcolor: '#ffffff',
+      barmode: 'stack',
+      margin: { l: 108, r: 78, t: 110, b: 170 },
+      legend: {
+        orientation: 'h',
+        y: -0.22, x: 0.0,
+        yanchor: 'top', xanchor: 'left',
+        entrywidth: 92,
+        entrywidthmode: 'pixels',
+        font: {size: 12},
+        bgcolor: 'rgba(255,255,255,0.0)'
+      },
+      xaxis: {
+        domain: [0.0, 1.0],
+        tickangle: -18,
+        categoryorder: 'array',
+        categoryarray: deltaLabels,
+        showgrid: false
+      },
+      yaxis: {
+        domain: [0.58, 1.0],
+        title: 'Change in incidents (2025 - 2024)',
+        zeroline: true,
+        zerolinecolor: '#999999',
+        zerolinewidth: 1.2,
+        showgrid: true, gridcolor: '#ECECEC'
+      },
+      xaxis2: {
+        domain: [0.0, 1.0],
+        anchor: 'y2',
+        title: 'Year',
+        type: 'category',
+        showgrid: false
+      },
+      yaxis2: {
+        domain: [0.0, 0.42],
+        anchor: 'x2',
+        title: 'Share of annual incidents (%)',
+        range: [0, 100],
+        showgrid: true, gridcolor: '#ECECEC'
+      },
+      annotations: [
+        {
+          xref: 'paper', yref: 'paper',
+          x: 0.06, y: 1.08, xanchor: 'left',
+          text: 'Net change by subtype (2025 vs 2024)',
+          showarrow: false, font: { size: 13, color: '#333333' }
+        },
+        {
+          xref: 'paper', yref: 'paper',
+          x: 0.01, y: 0.48, xanchor: 'left',
+          text: 'Composition shift between years',
+          showarrow: false, font: { size: 13, color: '#333333' }
+        },
+        {
+          xref: 'paper', yref: 'paper',
+          x: 0.965, y: 1.08, xanchor: 'right',
+          text: '<b>Total change:</b> +2,551',
+          showarrow: false, font: { size: 12, color: '#333333' }
+        }
+      ]
+    };
+
+    Plotly.newPlot('chart', traces, layout, { responsive: true, displayModeBar: false });
+  </script>
+</body>
+</html>

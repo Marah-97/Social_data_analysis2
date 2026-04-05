@@ -400,7 +400,7 @@
     <button class="tab-btn active" data-tab="intro"   role="tab">Introduction</button>
     <button class="tab-btn"        data-tab="part1"   role="tab">Part 1 · Geography</button>
     <button class="tab-btn"        data-tab="part2"   role="tab">Part 2 · Trends</button>
-    <button class="tab-btn"        data-tab="part3"   role="tab">Part 3 · Substances</button>
+    <button class="tab-btn"        data-tab="part3"   role="tab">Part 3 · Policy Shift</button>
     <button class="tab-btn"        data-tab="credits" role="tab">Credits</button>
   </div>
 
@@ -514,27 +514,49 @@
   <div class="tab-panel" id="tab-part3">
     <div class="content-wrap">
       <section>
-        <p class="section-label">Part 3 · Substance breakdown</p>
-        <h2>Not all drugs are equal — the rise of hard drugs</h2>
+        <p class="section-label">Part 3 · Policy shift</p>
+        <h2>What explains the 2025 rebound?</h2>
         <p>
-          The raw count of drug offenses tells part of the story, but it obscures <em>what kinds</em>
-          of drugs are driving the crisis. Figure 3 breaks down drug-related incidents by substance
-          type over time, distinguishing between heroin/opioids, cocaine, methamphetamine, marijuana,
-          and other drugs.
-        </p>
-        <p><em>Analysis and figure coming soon.</em></p>
+        At first glance, the 2025 rebound seems straightforward, drug incidents went up again. But totals
+        only tell part of the story. To understand what really changed, we need to look inside that increase.
+      </p>
+      <p>
+        In 2024, sales and distribution made up the largest share of recorded drug incidents, accounting for
+        41.6% of the total, while possession was a smaller category at 27.6%. If we stopped there, it would
+        be easy to assume that sales-related enforcement was still driving the city’s drug-incident profile.
+        But one year later, that picture looks completely different.
+      </p>
+      <p>
+        From 2024 to 2025, total incidents rise by 2,551. Yet the rebound is not spread evenly across all
+        subtypes. Most of it comes from one place: possession and paraphernalia, which alone increase by
+        2,070 incidents. At the same time, sales and distribution actually fall by 448. The balance of
+        enforcement shifts sharply. Possession grows to 48.0% of all drug incidents in 2025, while sales
+        drops to 19.1%.
+      </p>
+      <p>
+        One likely explanation is the passage of <strong>Proposition 36</strong> in 2024, which partially
+        reversed <strong>Proposition 47</strong> and made certain possession offenses, including fentanyl and methamphetamine
+        possession, chargeable again under harsher penalties and treatment-mandated felony provisions [2][4].
+        That policy change helps explain why the rebound is concentrated in low-level possession-related
+        incidents rather than in sales and distribution.
+      </p>
+      <p>
+        This matters because it changes how we should read the rebound. This is not simply a story of
+        “more drug incidents” across the board. It is a story of a different enforcement pattern taking
+        shape after the policy change. What returns in 2025 is not broad growth in every category, but a
+        strong rise in low-level possession-related reporting.
+      </p>
+      <p>
+        Figure 3 makes that shift visible from two angles at once, counts and shares. Reading both together
+        helps avoid a misleading one-number interpretation. The broader lesson is that policy does not just
+        shape the law on paper. It also shapes what gets recorded in police data and that, in turn, shapes
+        the story the data appears to tell.
+      </p>
         <div class="figure">
-          <div class="placeholder">
-            <div class="placeholder-icon">📊</div>
-            <p><strong>Figure 3</strong> — Substance breakdown chart (coming soon)</p>
-            <p style="margin-top:0.4rem;">Save your figure as <code>fig3_substance_breakdown.png</code> in the same folder as this HTML file.</p>
-          </div>
-          <!-- After generating, replace placeholder with:
-          <img src="fig3_substance_breakdown.png" alt="Drug offense types by year" />
-          -->
+          <iframe src="fig3_policy_shift.html" width="100%" height="740" frameborder="0" style="border:none; display:block;"></iframe>
           <p class="figure-caption">
-            <strong>Figure 3:</strong> Stacked bar chart showing drug offenses in San Francisco
-            broken down by substance type per year.
+            <strong>Figure 3:</strong> Decomposition of the 2024 to 2025 shift in drug incidents.
+            First panel shows net count change by subtype. Second panel shows share change between the years.
           </p>
         </div>
 
