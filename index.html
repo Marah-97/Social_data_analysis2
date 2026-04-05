@@ -631,32 +631,51 @@
   </footer>
 
   <script>
-    // TAB SWITCHING
-    const btns   = document.querySelectorAll('.tab-btn');
+    const btns = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.tab-panel');
-
+  
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
         btns.forEach(b => b.classList.remove('active'));
         panels.forEach(p => p.classList.remove('active'));
+  
         btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-        window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 60, behavior: 'smooth' });
+        const activePanel = document.getElementById('tab-' + btn.dataset.tab);
+        activePanel.classList.add('active');
+  
+        window.scrollTo({
+          top: document.querySelector('.tab-nav').offsetTop - 60,
+          behavior: 'smooth'
+        });
+  
         observeSections();
+  
+        // Force Leaflet iframe to redraw after hidden tab becomes visible
+        if (btn.dataset.tab === 'part1') {
+          const frame = document.getElementById('dual-map-frame');
+          if (frame) {
+            const currentSrc = frame.src;
+            frame.src = '';
+            setTimeout(() => {
+              frame.src = currentSrc;
+            }, 50);
+          }
+        }
       });
     });
-
-    // SCROLL FADE-IN
+  
     function observeSections() {
       const sections = document.querySelectorAll('section:not(.visible)');
       const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
       }, { threshold: 0.07 });
+  
       sections.forEach(s => obs.observe(s));
     }
-
+  
     observeSections();
   </script>
-
 </body>
 </html>
